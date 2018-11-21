@@ -43,12 +43,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | This is not exactly a route, but allows you to automatically route
 | controller and method names that contain dashes. '-' isn't a valid
 | class or method name character, so it requires translation.
-| When you set this option to TRUE, it will replace ALL dashes in the
 | controller and method URI segments.
 |
 | Examples:	my-controller/index	-> my_controller/index
-|		my-controller/my-method	-> my_controller/my_method
+|		my-controller/my-method	-> my_contro| When you set this option to TRUE, it will replace ALL dashes in the
+ller/my_method
 */
-$route['default_controller'] = 'welcome';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+
+// process car in out
+$route['process-card/(:any)'] = 'parking/process_card/$1';
+// input card information
+$route['update-card-info/(:num)/(:any)'] = 'parking/update_card_info/$1/$2';
+$route['get-parking-information'] = 'parking/get_parking_information';
