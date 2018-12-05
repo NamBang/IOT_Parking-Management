@@ -74,7 +74,7 @@ void loop()
         if(InChar == '.') 
         {
             Serial.print(InString);
-            client.send("RFID", "RFID",InString);
+            client.send("RFID", "RFID_A",InString);
             InString="";
             continue;
         }

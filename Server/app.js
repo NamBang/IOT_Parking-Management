@@ -2,13 +2,14 @@ const PORT = 3000;									//Ðat dia chi Port duoc mo ra de tao ra chuong trinh
  
 var http = require('http') 							//#include thu vien http -
 var socketio = require('socket.io')				//#include thu vien socketio
- 
 var ip = require('ip');
+
+//var ws = express();
 var app = http.createServer();					//#Khoi tao mot chuong trình mang (app)
 var io = socketio(app);								//#Phai khoi tao io sau khi tao app!
 app.listen(PORT);										// Cho socket server (chuong trinh mang) lang nghe ? port 
 console.log("Server nodejs chay tai dia chi: " + ip.address() + ":" + PORT)
- 
+
 //giai nen chuoi JSON thanh cac OBJECT
 function ParseJson(jsondata) {
     try {
@@ -54,10 +55,5 @@ io.on('connection', function(socket) {	//'connection' (1) nay khac gi voi 'conne
     socket.on('arduino', function (data) {
         io.sockets.emit('arduino', { message: 'R0' });
         console.log(data);
-     
-
       });
-
-
-
 });
