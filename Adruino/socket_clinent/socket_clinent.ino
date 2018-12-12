@@ -1,6 +1,7 @@
 
 #include <SocketIOClient.h>
 #include <ESP8266WiFi.h>
+#include <String.h>
 
  
 SocketIOClient client;
@@ -9,12 +10,12 @@ SocketIOClient client;
 //const char* ssid      =  "TRUNG TAM KTX";
 //const char* password  =  "Nhu mat khau cu.";
 
-const char* ssid = "Hacker";          //name Wifi ma Socket server connecting
-const char* password = "25111996";  //Pass wifi 
+const char* ssid = "nambang";          //name Wifi ma Socket server connecting
+const char* password = "123456789";  //Pass wifi 
 
 String InString= "";
-char host[] = "192.168.137.1";  //address IP service
-int port = 3000;                  //port server create
+char host[] = "35.197.137.222 ";  //address IP service
+int port = 80;                  //port server create
 
 
 //từ khóa extern: dùng để #include các biến toàn cục ở một số thư viện khác. Trong thư viện SocketIOClient có hai biến toàn cục
@@ -61,7 +62,7 @@ void setup()
     if (client.connected()) {
         //Thì gửi sự kiện ("connection") đến Socket server ahihi.
         Serial.print("Ket noi den socket server thanh cong");
-        client.send("connection", "message", "Connected !!!!");
+        client.send("connection", "message", "Connected !!!!!!!");
     }
 }
  
@@ -70,11 +71,14 @@ void loop()
       while(Serial.available())
       {
         char InChar=Serial.read();
+        String message;
         InString+=(char)InChar;
         if(InChar == '.') 
         {
-            Serial.print(InString);
-            client.send("RFID", "RFID_A",InString);
+           Serial.print(InString);
+          
+            client.send("parking","{\"name\":\"UIT\",\"id\":\"" + InString + "\"}");
+            //client.send("RFID", "RFID",InString);
             InString="";
             continue;
         }
