@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>Demo Socketio - Homepage</title>
+		<script src="jquery/jquery.js"></script>
+		<script src="socket.io/socket.io.js"></script>
+
+		<script>
+			var socket = io("http://192.168.137.1:3000");
+
+            //client nhận dữ liệu từ server
+			socket.on("Server-sent-data", function(data)
+			{
+				$("#chat-content").append(data);
+			});
+            
+            //client gửi dữ liệu lên server
+			$(document).ready(function()
+			{
+				$("#send").click(function()
+				{
+					socket.emit("Client-sent-data", "Hello world");
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<h1>Demo Socketio</h1>
+
+		<div>
+			<button id="send">Check number availble</button>
+		</div>
+	</body>	
+</html>
